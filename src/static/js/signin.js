@@ -97,7 +97,7 @@
     g.UserUtil.addUser({id: 2, name: "zza", pwd: "zza", role: "admin"});
     g.UserUtil.addUser({id: 3, name: "zhm", pwd: "zhm", role: ["admin", "xenUser"]});
     g.UserUtil.addUser({id: 4, name: "jack", pwd: "jack", role: "xenUser", st: 0});
-    g.UserUtil.addUser({id: 4, name: "tom", pwd: "tom", role: "cUser"});
+    g.UserUtil.addUser({id: 5, name: "tom", pwd: "tom", role: "cUser"});
   } else {
     DB.users = _users;
   }
