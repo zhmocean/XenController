@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="./docs-assets/ico/favicon.png">
+
+    <title>权限管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="./css/theme.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="./docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      .is-valid {
+        color: #468847;
+        background-color: #dff0d8 !important;
+      }
+
+      .is-forbidden {
+        color: #c7254e;
+        background-color: #f9f2f4 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">XenServer web管理系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./user-list.html">主页</a></li>
+            <li><a href="#">xenServer</a></li>
+            <!--li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul-->
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="actUserName"></span><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">回到首页</a></li>
+                <li><a href="#">任务管理</a></li>
+                <li><a href="#">日志查看</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">系统设置</li>
+                <li><a href="#">修改密码</a></li>
+                <li><a id="btn-signout" href="#">登出</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!--div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#">首页</a>
+            </li>
+            <li>
+              <a href="#">资料</a>
+            </li>
+            <li class="disabled">
+              <a href="#">信息</a>
+            </li>
+            <li class="dropdown pull-right">
+               <a href="#" data-toggle="dropdown" class="dropdown-toggle">下拉<strong class="caret"></strong></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">操作</a>
+                </li>
+                <li>
+                  <a href="#">设置栏目</a>
+                </li>
+                <li>
+                  <a href="#">更多设置</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                  <a href="#">分割线</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div-->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">功能列表</h3>
+            </div>
+            <div class="panel-body">
+              <!--ul class="nav nav-list">
+                <li class="nav-header">
+                  用户功能
+                </li>
+                <li class="active">
+                  用户管理
+                </li>
+                <li>
+                  角色管理
+                </li>
+                <li>
+                  授权管理
+                </li>
+                <li class="nav-header">
+                  xenserver管理
+                </li>
+                <li>
+                  <a class="active" href="#">服务器管理</a>
+                </li>
+                <li>
+                  <a href="#">服务器状态</a>
+                </li>
+                <li>
+                  <a href="#">帮助</a>
+                </li>
+              </ul-->
+              <div class="list-group">
+                <a href="./user-list.html" class="list-group-item">用户信息</a>
+                <a id="UAMS" href="#" class="list-group-item active" style="display:none;">用户授权</a>
+                <a id="XSMS" href="./xenserver.html" class="list-group-item" style="display:none;">xenServer管理</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          
+          <p></p>
+
+          <div id="panel-gm">
+            <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.min.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./docs-assets/js/holder.js"></script>
+
+    <script src="./js/loStorage.min.js"></script>
+    <script src="./js/user-gm.js"></script>
+    <script src="./js/swfobject.js"></script>
+  </body>
+</html>

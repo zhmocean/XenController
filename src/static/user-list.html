@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="./docs-assets/ico/favicon.png">
+
+    <title>用户列表</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="./css/theme.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="./docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      .is-valid {
+        color: #468847;
+        background-color: #dff0d8 !important;
+      }
+
+      .is-forbidden {
+        color: #c7254e;
+        background-color: #f9f2f4 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">XenServer web管理系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">主页</a></li>
+            <li><a href="./xenserver.html">xenServer</a></li>
+            <!--li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul-->
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="actUserName"></span><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">回到首页</a></li>
+                <li><a href="#">任务管理</a></li>
+                <li><a href="#">日志查看</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">系统设置</li>
+                <li><a href="#">修改密码</a></li>
+                <li><a id="btn-signout" href="#">登出</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!--div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#">首页</a>
+            </li>
+            <li>
+              <a href="#">资料</a>
+            </li>
+            <li class="disabled">
+              <a href="#">信息</a>
+            </li>
+            <li class="dropdown pull-right">
+               <a href="#" data-toggle="dropdown" class="dropdown-toggle">下拉<strong class="caret"></strong></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">操作</a>
+                </li>
+                <li>
+                  <a href="#">设置栏目</a>
+                </li>
+                <li>
+                  <a href="#">更多设置</a>
+                </li>
+                <li class="divider">
+                </li>
+                <li>
+                  <a href="#">分割线</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div-->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">功能列表</h3>
+            </div>
+            <div class="panel-body">
+              <!--ul class="nav nav-list">
+                <li class="nav-header">
+                  用户功能
+                </li>
+                <li class="active">
+                  用户管理
+                </li>
+                <li>
+                  角色管理
+                </li>
+                <li>
+                  授权管理
+                </li>
+                <li class="nav-header">
+                  xenserver管理
+                </li>
+                <li>
+                  <a class="active" href="#">服务器管理</a>
+                </li>
+                <li>
+                  <a href="#">服务器状态</a>
+                </li>
+                <li>
+                  <a href="#">帮助</a>
+                </li>
+              </ul-->
+              <div class="list-group">
+                <a href="#" class="list-group-item active">用户信息</a>
+                <a id="UAMS" href="./user-gm.html" class="list-group-item" style="display:none;">用户授权</a>
+                <a id="XSMS" href="./xenserver.html" class="list-group-item" style="display:none;" >xenServer管理</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="tabbable" id="tabs-user">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#panel-1" data-toggle="tab">个性首页</a>
+              </li>
+              <li>
+                <a href="#panel-2" data-toggle="tab">用户管理</a>
+              </li>
+              <li>
+                <a href="#panel-3" data-toggle="tab">操作日志</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="panel-1">
+                <p></p>
+                <ol class="breadcrumb">
+                  <li><a href="#">主页</a></li>
+                  <li><a href="#">xenserver连接池</a></li>
+                  <li class="active">任务</li>
+                </ol>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <span class="badge">2</span>
+                    未处理的虚拟机分配请求
+                  </li>
+                  <li class="list-group-item is-forbidden">
+                    <span class="badge">1</span>
+                    虚拟机错误处理
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge">15</span>
+                    虚拟机状态
+                  </li>
+                  <li class="list-group-item">
+                    <span class="badge">3</span>
+                    申请添加系统用户的通知
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-pane fade" id="panel-2">
+                <!-- Button trigger modal -->
+              <p></p>
+              <button id="btn-addUser" style="display:none;" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addUserModal">
+                新增用户
+              </button>
+              <p></p>
+
+              <!-- Modal -->
+              <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">增加新用户</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form id="form-addUser" class="form-horizontal" role="form">
+                        <div class="form-group">
+                          <label for="inputEmail3" class="col-sm-2 control-label">用户名：</label>
+                          <div class="col-sm-10">
+                            <input id="uName" type="email" class="form-control" placeholder="用户名">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPassword3" class="col-sm-2 control-label">密码：</label>
+                          <div class="col-sm-10">
+                            <input id="uPwd" type="password" class="form-control" placeholder="密码">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="inputPassword3" class="col-sm-2 control-label">角色：</label>
+                          <div class="col-sm-10">
+                            <p>可多选</p>
+                            <select id="uRole" multiple class="form-control">
+                            </select>
+                          </div>
+                        </div>
+                      </form>
+                      <div id="alert-signin" class="alert alert-danger" style="display: none;"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                      <button id="btnAddUser" type="button" class="btn btn-primary">保存</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+
+              <div id="confirm-rmUser" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">删除用户</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>用户删除后不可恢复，确定继续删除用户吗？</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                      <button id="doRmUser"  type="button" class="btn btn-primary">确定删除</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div>
+
+                <table class="table table-bordered table-condensed table-striped">
+                  <thead>
+                    <tr>
+                      <th>
+                        编号
+                      </th>
+                      <th>
+                        用户名
+                      </th>
+                      <th>
+                        角色
+                      </th>
+                      <th>
+                        状态
+                      </th>
+                      <th>
+                        操作
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="list-user">
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="tab-pane fade" id="panel-3">
+                <p></p>
+                <table class="table table-bordered table-condensed table-striped">
+                  <thead>
+                    <tr>
+                      <th>
+                        编号
+                      </th>
+                      <th>
+                        用户名
+                      </th>
+                      <th>
+                        操作
+                      </th>
+                      <th>
+                        时间
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="list-log">
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.min.js"></script>
+    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="./docs-assets/js/holder.js"></script>
+
+    <script src="./js/loStorage.min.js"></script>
+    <script src="./js/user-list.js"></script>
+  </body>
+</html>

@@ -1,8 +1,7 @@
 import web
 class s_index:
 	def GET(self):
-		render = web.template.render("template/")
-		return render.home("hello")
+		web.redirect("/static/index.html")
 
 class s_api:
 	def GET(self):
